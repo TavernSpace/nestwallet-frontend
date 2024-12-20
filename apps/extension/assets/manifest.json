@@ -1,0 +1,78 @@
+{
+  "manifest_version": 3,
+  "name": "Nest Wallet",
+  "description": "The Ultimate Trading Wallet",
+  "author": "contact@nestwallet.xyz",
+  "homepage_url": "https://nestwallet.xyz",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "background": {
+    "service_worker": "serviceworker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_globs": ["*://*.atlassian.net/*"],
+      "run_at": "document_start",
+      "js": ["injected.js"],
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "exclude_globs": ["*://*.atlassian.net/*"],
+      "js": ["popupMessage.js"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "exclude_globs": ["*://*.atlassian.net/*"],
+      "run_at": "document_start",
+      "js": ["contentscript.js"],
+      "all_frames": true
+    },
+    {
+      "matches": ["*://connect.trezor.io/9/popup.html"],
+      "js": ["./vendor/trezor-content-script.js"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "default-src 'self';"
+  },
+  "icons": {
+    "16": "favicon-32.png",
+    "32": "favicon-32.png",
+    "48": "favicon-48.png",
+    "128": "favicon-128.png"
+  },
+  "permissions": [
+    "alarms",
+    "gcm",
+    "identity",
+    "notifications",
+    "sidePanel",
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": ["*://*/"],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["popupMessage.js"],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["./fonts/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgNnhfatVGK3Htrfe0uUdHlpBc0UI8IkmHdZgBO+Vghh7cviOfG9VdfefFHU4rCFmS1Efcj3BrI7LxA5xq1t/grzNJo4aGulPR1pxaIQvRh0wFxVgW/6pefVQqEsx1WjmwPbi1Qqf9DKorvioDqF0Sas8pAkAXj+P3uFhL2GxgRFpeGWp6NqauJtuTt1C3k0A8BCmnOEI1f4ykoUDq+p078NVPPUfvicGP09Pmv8C9Jl30iSdfjqM78QRKohEeFCb0c0YBUonbqRQznanWWxapfuwkiNdLww2UsOBaj9fcjXYuOV82XfEvh2PlfJDZlt+4RALKi2AIzzcFy5Jdkx7XQIDAQAB"
+}

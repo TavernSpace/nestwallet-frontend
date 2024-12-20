@@ -1,0 +1,42 @@
+{
+  "cli": {
+    "version": ">= 5.4.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "base": {
+      "node": "18.16.0",
+      "ios": {
+        "image": "latest"
+      },
+      "yarn": "1.19.0"
+    },
+    "development": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "APP_VARIANT": "development"
+      }
+    },
+    "preview": {
+      "extends": "base",
+      "distribution": "internal"
+    },
+    "production": {
+      "extends": "base",
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "releaseStatus": "draft"
+      },
+      "ios": {
+        "appName": "Nest Wallet",
+        "companyName": "Tavern Technologies, Inc"
+      }
+    }
+  }
+}

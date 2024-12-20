@@ -1,0 +1,16 @@
+diff --git a/node_modules/react-native-keychain/android/src/main/java/com/oblador/keychain/cipherStorage/CipherStorageBase.java b/node_modules/react-native-keychain/android/src/main/java/com/oblador/keychain/cipherStorage/CipherStorageBase.java
+index 5c82167..d786ced 100644
+--- a/node_modules/react-native-keychain/android/src/main/java/com/oblador/keychain/cipherStorage/CipherStorageBase.java
++++ b/node_modules/react-native-keychain/android/src/main/java/com/oblador/keychain/cipherStorage/CipherStorageBase.java
+@@ -257,11 +257,8 @@ abstract public class CipherStorageBase implements CipherStorage {
+     } catch (final UnrecoverableKeyException ex) {
+       // try one more time
+       if (retry.getAndDecrement() > 0) {
+-        keyStore.deleteEntry(safeAlias);
+-
+         return null;
+       }
+-
+       throw ex;
+     }
+ 

@@ -1,0 +1,39 @@
+diff --git a/node_modules/@ton/ton/dist/client/api/HttpApi.js b/node_modules/@ton/ton/dist/client/api/HttpApi.js
+index 47ca228..c80ecd1 100644
+--- a/node_modules/@ton/ton/dist/client/api/HttpApi.js
++++ b/node_modules/@ton/ton/dist/client/api/HttpApi.js
+@@ -260,20 +260,22 @@ class HttpApi {
+         if (this.parameters.apiKey) {
+             headers['X-API-Key'] = this.parameters.apiKey;
+         }
+-        let res = await axios_1.default.post(this.endpoint, JSON.stringify({
+-            id: '1',
+-            jsonrpc: '2.0',
+-            method: method,
+-            params: body
+-        }), {
++        let res = await fetch(this.endpoint, {
++            method: 'POST',
++            mode: 'cors',
++            body: JSON.stringify({
++                id: '1',
++                jsonrpc: '2.0',
++                method: method,
++                params: body
++            }),
+             headers,
+-            timeout: this.parameters.timeout,
+-            adapter: this.parameters.adapter
+-        });
+-        if (res.status !== 200 || !res.data.ok) {
+-            throw Error('Received error: ' + JSON.stringify(res.data));
++        })
++        if (res.status !== 200 || !res.ok) {
++            throw Error('Received error: ' + JSON.stringify(res.status));
+         }
+-        let decoded = codec.safeParse(res.data.result);
++        const jres = await res.json();
++        let decoded = codec.safeParse(jres.result);
+         if (decoded.success) {
+             return decoded.data;
+         }

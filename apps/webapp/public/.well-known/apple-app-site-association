@@ -1,0 +1,33 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "H4PZGJYPZ9.xyz.nestwallet.nestwallet"
+        ],
+        "components": [
+          {
+            "/": "/referral/*"
+          },
+          {
+            "/": "/tonconnect*"
+          },
+          {
+            "/": "/*"
+          }
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "H4PZGJYPZ9.xyz.nestwallet.nestwallet"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "H4PZGJYPZ9.xyz.nestwallet.nestwallet"
+    ]
+  },
+  "appclips": {}
+}

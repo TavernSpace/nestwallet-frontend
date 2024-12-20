@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-passkeys/ios/ReactNativePasskeysModule.swift b/node_modules/react-native-passkeys/ios/ReactNativePasskeysModule.swift
+index b4f3dab..4364f80 100644
+--- a/node_modules/react-native-passkeys/ios/ReactNativePasskeysModule.swift
++++ b/node_modules/react-native-passkeys/ios/ReactNativePasskeysModule.swift
+@@ -221,7 +221,11 @@ private func preparePlatformRegistrationRequest(challenge: Data,
+ 
+     if let excludedCredentials = request.excludeCredentials {
+         if !excludedCredentials.isEmpty {
+-            platformKeyRegistrationRequest.excludedCredentials = excludedCredentials.map({ $0.getPlatformDescriptor() })
++            if #available(iOS 17.4, *) {
++                platformKeyRegistrationRequest.excludedCredentials = excludedCredentials.map({ $0.getPlatformDescriptor() })
++            } else {
++                // Fallback on earlier versions
++            }
+         }
+     }
+     
